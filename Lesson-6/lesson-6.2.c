@@ -14,5 +14,9 @@ int main(void)
 		printf("\n");
 	}
 
+	printf("&sum = %p\n", &sum);
+	printf("&i = %p\n", &i);
+	printf("&j = %p\n", &j);
+			
 	return 0;
 }

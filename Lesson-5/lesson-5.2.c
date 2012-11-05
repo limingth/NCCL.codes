@@ -5,12 +5,17 @@
 int main(void)
 {
 	int sum = 0;
-	int i;
 	
+#if (!defined(__STDC__))
+	printf("Not Standard C \n");
+	for (int i = 0; i <= 100; i++)
+#else
+	int i;
 	for (i = 0; i <= 100; i++)	
+#endif
 	{
+		PRINT(sum);
 		sum += i;
-		PRINT(sum);		
 	}
 
 	printf("sum = %d\n", sum);
