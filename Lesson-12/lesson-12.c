@@ -1,49 +1,52 @@
 /*
- * main.c - find how many DIGIT from A to B
+ *      main.c - demo helloworld application
  *
- * Copyright (C) AKAE - li ming <limingth@sina.com>
- *
- * 
+ *	Author: li ming <limingth@akaedu.org>
+ *	Date:	2007-01-01
+ *	Version:  1.0
  */
+
 #include <stdio.h>
 
-/*
- * find - calculate how many digit in num
- * @num:	the number we want to find
- * @digit:	the digit we search in num
- *
- * Return value:  how many digit in this num
- *
- */
-int find(int num, int digit)
+union u_tag 
 {
-	int counter = 0;	/* the result of how many digit in num */
+	unsigned char c[4];
+	int i;
+	double d;
+} u;
 
-	do {
-		/* get the last digit of num */
-		if (num % 10 == digit)
-			counter++;
+#define printc( expr )	printf( #expr " = %c \n", expr )
+#define printi( expr )	printf( #expr " = %d \n", expr )
+#define printd( expr )	printf( #expr " = %f \n", expr )
+#define printx( expr )	printf( #expr " = %x \n", expr )
 
-		/* get rid of the last digit */
-		num = num / 10;
-	} while (num != 0);
-
-	return counter;
-}
-
-int main(void)
+int main( int argc, char * argv[] )
 {
-	int begin = 0;		/* the begin number */
-	int end = 100;		/* the end number */
-	int i = 0;
-	int sum = 0;		/* the result of sumary */
+	printf( "hello, Cruel World! \n" );
 
-	/* calculate how many 9 in 1 to 100 */
-	for (i = begin; i <= end; i++) {
-		sum += find(i, 9);
-	}
+	printf( "sizeof u_tag = %d \n", sizeof(u) );
+	printf( "sizeof double = %d \n", sizeof(double) );
 
-	printf("sum = %d \n", sum);
+	u.c[0] = '0';
+
+	printf( "u.c[0] = %c \n", u.c[0] );
+	printi( u.c[0] );
+	printi( u.c[1] );
+	printi( u.c[2] );
+	printi( u.c[3] );
+	printi( u.i );
+	printd( u.d );
+	
+	//u.i = 0x11223344;
+	u.i = 0x87654321;
+	printf( "u.c[0] = %c \n", u.c[0] );
+	printx( u.c[0] );
+	printx( u.c[1] );
+	printx( u.c[2] );
+	printx( u.c[3] );
+	printx( u.i );
+	printd( u.d );
 
 	return 0;
 }
+
