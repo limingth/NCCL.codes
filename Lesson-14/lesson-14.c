@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h> 
 
 /* define chessboard size */
 #define ROW  10
@@ -62,7 +64,7 @@ int onboard(int x, int y)
 
 int check(int x, int y)
 {
-	int i = 0, j = 0;
+	int i = 0;
 	int counter = 1;	
 	int nx, ny;		// next x y
 
@@ -106,7 +108,8 @@ int main(int argc, char *argv[])
 
 	printf("please input a point position: ");
 	scanf("%d %d", &x, &y);
-		
+	printf("point(%d, %d)\n", x, y);
+	
 	ways = check(x, y);
 	printf("Total is %d way out!\n", ways);
 	
