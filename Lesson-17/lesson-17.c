@@ -1,25 +1,60 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-#define N 1024
-
-char *my_strcpy(char *dest, char *src)
+int get_input_type(char c)
 {
-    int i;
-    for(i = 0; src[i]; ++i)
-	   dest[i] = src[i];
-    
-     dest[i] = '\0';
-    return dest;
+	if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
+		return 1;
+
+	if (c >= '0' && c <= '9')
+		return 2;
+
+	return 0;
 }
 
-int main(int argc, char *argv[])
+int main(void)
 {
-    char d[N];
-    char s[N] = "Hello World";
+	char pre[] = "4213657";
+	char in[] = "1234567";
+	char str[] = "Don't ask what your country can do for you, but ask what you can do for your country.\n";
 
-    printf("s = %s\n", s);
-//    my_strcpy(d, s);
-    printf("d = %s\n", my_strcpy(d,s));
-    return 0;
+	int i = 0;
+	int pos = 0;
+
+	int state = 0;	// init state
+	int input = 0;	// 0: space		1: alpha
+
+	printf("hello, search word from string:\n");
+	printf("<%s> \n", str);
+
+	while (1)
+	{
+		char c;
+		char wordbuf[32];
+
+		c = str[pos++];
+		if (c == '\0')
+			break;
+
+		input = get_input_type(c);
+		//printf("state = %d ", state);
+
+		if (state == 0 && input == 1)
+		{
+			state = 1;
+			//printf("word begin with <%c>\n", c);
+			i = 0;
+			wordbuf[i++] = c;
+		} else if (state == 1 && input == 0)
+				{
+					wordbuf[i] = '\0';
+					printf("find a word = <%s>\n", wordbuf);
+			
+					state = 0;
+				} else if (state == 1 && input == 1)
+					wordbuf[i++] = c;
+	}
+
+	return 0;
 }
-

@@ -1,67 +1,120 @@
-
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-int get_input_type(char c)
+void putchar_hex(char c)
 {
-	if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
-		return 1;
+	const char * hex = "0123456789ABCDEF";	// good
+	//char hex[] = "0123456789ABCDEF";	bad!
 
-	if (c >= '0' && c <= '9')
-		return 2;
+	putchar(hex[(c & 0xf0)>>4]);
+	putchar(hex[(c & 0x0f)>>0]);
+	//putchar(' ');
+}
+
+void putint_hex(int a)
+{
+	putchar_hex( (a>>24) & 0xFF );
+	putchar_hex( (a>>16) & 0xFF );
+	putchar_hex( (a>>8) & 0xFF );
+	putchar_hex( (a>>0) & 0xFF );
+}
+
+char * itoa(int num, char * buf)
+{	
+	int i = 0;
+	int len = 0;
+
+	do 
+	{
+		buf[i++] = num % 10 + '0';
+		num /= 10;		
+	} while (num);
+	buf[i] = '\0';
+
+	len = i;
+	for (i = 0; i < len/2; i++)
+	{
+		char tmp;
+		tmp = buf[i];
+		buf[i] = buf[len-i-1];
+		buf[len-i-1] = tmp;
+	}
+
+	return buf;	
+}
+
+#if 0
+#include <stdarg.h>
+#else
+typedef int * my_va_list;
+#define my_va_start(ap, A)		(ap = (int *)&(A) + 1)
+#define my_va_arg(ap, T)		(*(T *)ap++)
+#define my_va_end(ap)		((void)0)
+#endif
+
+static int myputs(const char * s)
+{
+	while (*s)
+		putchar(*s++);
 
 	return 0;
 }
 
-int main(void)
+int myprintf(const char * format, ...)
 {
-	char pre[] = "4213657";
-	char in[] = "1234567";
+	char c;	
+	my_va_list ap;
 
-//	char str[] = "helloworld";
-	char str[] = "Don't ask what your country can do for you, but ask what you can do for your country.\n";
+	my_va_start(ap, format);
 
-	int i = 0;
-	int pos = 0;
-
-	int state = 0;	// init state
-	int input = 0;	// 0: space		1: alpha
-
-	printf("hello, search word from string:\n");
-	printf("<%s> \n", str);
-
-	while (1)
+	while ((c = *format++) != '\0')
 	{
-		char c;
-		char wordbuf[32];
-
-		c = str[pos++];
-		if (c == '\0')
-			break;
-
-		input = get_input_type(c);
-		//printf("state = %d ", state);
-
-#if 1
-		if (state == 0 && input == 1)
+		switch (c)
 		{
-			state = 1;
-			//printf("word begin with <%c>\n", c);
-			i = 0;
-			wordbuf[i++] = c;
-		} else if (state == 1 && input == 0)
-		{
-			wordbuf[i] = '\0';
-			printf("find a word = <%s>\n", wordbuf);
-	
-			state = 0;
-		} else if (state == 1 && input == 1)
-			wordbuf[i++] = c;
-#endif
+			case '%':
+				c = *format++;
 
+				switch (c)
+				{
+					char ch;
+					char * p;
+					int a;
+					char buf[100];
+
+					case 'c':
+						ch = my_va_arg(ap, int);
+						putchar(ch);
+						break;
+					case 's':
+						p = my_va_arg(ap, char *);
+						myputs(p);
+						break;					
+					case 'x':
+						a = my_va_arg(ap, int);
+						putint_hex(a);
+						break;		
+					case 'd':
+						a = my_va_arg(ap, int);
+						itoa(a, buf);
+						myputs(buf);
+						break;	
+
+					default:
+						break;
+				}				
+				break;		
+
+			default:
+				putchar(c);
+				break;
+		}
 	}
 
+	return 0;	
+}
 
+int main(void)
+{
+	myprintf("test: %c, %s, %d, 0x%x\n", 'A', "abcdef", 11, 0x23);
+	
 	return 0;
 }
