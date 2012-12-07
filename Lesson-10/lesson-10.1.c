@@ -39,7 +39,7 @@ int main(void)
         }
 
     #if 1
-        pos = ++pos % ALL_NUM;
+        pos = (pos + 1) % ALL_NUM;
         step = step % COUNT_NUM;
     #else   
         pos++;
