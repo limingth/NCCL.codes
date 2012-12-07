@@ -74,7 +74,6 @@ int main(void)
 		//step = step % COUNT_NUM;
 		if (step == COUNT_NUM)
 			step = 0;
-
 	}
 
 	return 0;
