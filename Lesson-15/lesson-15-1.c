@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	
  	printf("please input a number:");
 	scanf("%d", &num);
-	printf("number in hex is 0x%x\n", n);
+	printf("number in hex is 0x%x\n", num);
 	
 	printf("%d bit '1' in %d\n", count_bit_1(num), num);
     
