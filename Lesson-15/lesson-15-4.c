@@ -3,7 +3,7 @@
 struct flag
 {
 	unsigned int is_keyword : 1;
-	unsigned int is_extern : 1;
+	unsigned int is_extern : 2;
 	unsigned int is_static : 1;
 	unsigned int is_mid : 4;
 	unsigned int is_high : 1;
@@ -18,7 +18,7 @@ int main( int argc, char * argv[] )
 	flags.is_extern = 1;
 	flags.is_high = 1;
 
-	flags.is_mid = 2;
+	flags.is_mid = 7;
 
 	printf( "flags = 0x%x \n", flags );
 	printf( "sizeof flags = 0x%x \n",sizeof(flags) );

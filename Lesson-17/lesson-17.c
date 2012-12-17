@@ -15,27 +15,21 @@ int get_input_type(char c)
 
 int main(void)
 {
-	char pre[] = "4213657";
-	char in[] = "1234567";
-	char str[] = "Don't ask what your country can do for you, but ask what you can do for your country.\n";
+	char * str = "Don't ask what your country can do for you, but ask what you can do for your country.";
 
 	int i = 0;
 	int pos = 0;
+	char c;
 
 	int state = 0;	// init state
 	int input = 0;	// 0: space		1: alpha
 
 	printf("hello, search word from string:\n");
-	printf("<%s> \n", str);
+	printf("<%s>\n", str);
 
-	while (1)
+	while ((c = *str++) != '\0')
 	{
-		char c;
 		char wordbuf[32];
-
-		c = str[pos++];
-		if (c == '\0')
-			break;
 
 		input = get_input_type(c);
 		//printf("state = %d ", state);
@@ -47,12 +41,12 @@ int main(void)
 			i = 0;
 			wordbuf[i++] = c;
 		} else if (state == 1 && input == 0)
-				{
-					wordbuf[i] = '\0';
-					printf("find a word = <%s>\n", wordbuf);
-			
-					state = 0;
-				} else if (state == 1 && input == 1)
+			{
+				wordbuf[i] = '\0';
+				printf("find a word = <%s>\n", wordbuf);
+		
+				state = 0;
+			} else if (state == 1 && input == 1)
 					wordbuf[i++] = c;
 	}
 

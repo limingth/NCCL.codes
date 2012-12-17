@@ -8,21 +8,26 @@ char * my_strcpy(char * dst, const char * src)
 	char *s = (char *)src;
 	int delt = dst - src;
 
-	while ((s[delt] = *s++) != '\0');
+//	while ((s[delt] = *s++) != '\0');
+	
+	while ((s[delt] = *s++) != '\0')
+		;
 
 	return dst;
 }
 
 int main(int argc, char *argv[])
 {
-    char d[32];
-    char s[32] = "Hello World";
+	char d[32];
+	char s[32] = "Hello World";
 
-    printf("s = %s\n", s);
+	printf("s = %s\n", s);
 
-//	my_strcpy(d, s);
-    printf("d = %s\n", my_strcpy(d, s));
-	
-    return 0;
+	my_strcpy(d, s);
+	printf("d = %s\n", d);
+
+	//printf("d = %s\n", my_strcpy(d, s));
+
+	return 0;
 }
 
