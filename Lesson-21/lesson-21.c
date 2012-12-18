@@ -1,17 +1,18 @@
 /*
  * state.c - using FSM to find (+/-)float number strings in buf
  *
- * Copyright (C) 2010	li ming <limingth@akaedu.org>
+ * Copyright (C) 2010	li ming <limingth@gmail.com>
  *
  * find number string such as 123, +1, -03.708 in "ab123+1--03.708"
  *
  */
 #include <stdio.h>
 
+//#define DEBUG
 #ifdef DEBUG
-	#define DPRINT	printf
+	#define DPRINT(fmt, args...)	printf(fmt, ##args)
 #else
-	#define DPRINT	//
+	#define DPRINT(fmt, args...)	
 #endif
 
 /* the string buffer to deal with */
