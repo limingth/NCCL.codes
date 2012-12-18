@@ -127,6 +127,8 @@ int myprintf(const char * format, ...)
 
 int main(void)
 {
+	printf("test: %c, %s, %d, 0x%x\n", 'A', "abcdef", 11, 0x23);
+
 	myprintf("test: %c, %s, %d, 0x%x\n", 'A', "abcdef", 11, 0x23);
 
 	return 0;
