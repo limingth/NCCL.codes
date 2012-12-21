@@ -59,22 +59,26 @@ int input;
  * 0: (a) start state or restart state without digit 
  * 1: (a+/+) get sign +/-
  * 2: (+9/9) get digit before point 
- * 3: (+9./9.) get point after digit
+ * 3: (+./.) get point directly
  * 4: (+9.9/9.9) get digit after point
- * 5: (+./.) get point directly
+ * 5: (+9./9.) get point after digit
  * -1: end state
  *
+ */
+
+/*
+ 
 state transition table:
     input
 S	0  1  2  3  4
-0	0, 1, 2, 5, -1,
-1	0, 1, 2, 5, -1,
-2	0, 1, 2, 3, -1,
-3	0, 1, 4, 5, -1,
-4	0, 1, 4, 5, -1,
-5	0, 1, 4, 5, -1,
- *
- */
+0	0, 1, 2, 3, -1,
+1	0, 1, 2, 3, -1,
+2	0, 1, 2, 5, -1,
+3	0, 1, 4, 3, -1,
+4	0, 1, 4, 3, -1,
+5	0, 1, 4, 3, -1,
+
+*/
 int state;
 
 /* record how many number string found */
@@ -120,12 +124,12 @@ void action_null(void)
 
 int state_table[6][5] = 
 {
-	0, 1, 2, 5, -1,
-	0, 1, 2, 5, -1,
 	0, 1, 2, 3, -1,
-	0, 1, 4, 5, -1,
-	0, 1, 4, 5, -1,
-	0, 1, 4, 5, -1,
+	0, 1, 2, 3, -1,
+	0, 1, 2, 5, -1,
+	0, 1, 4, 3, -1,
+	0, 1, 4, 3, -1,
+	0, 1, 4, 3, -1,
 };
 
 void (*action[6][5])(void) =
@@ -133,10 +137,9 @@ void (*action[6][5])(void) =
 	action_null, action_save, action_save, action_save, action_null,
 	action_zero, action_zero_save, action_save, action_save, action_zero,
 	action_found, action_found_save, action_save, action_save, action_found,
-	action_found, action_found_save, action_save, action_found_save, action_found,
-	action_found, action_found_save, action_save, action_found_save, action_found,
 	action_zero, action_zero_save, action_save, action_zero_save, action_zero,
-	//action_found, action_found_save, action_save, action_found_save, action_found,
+	action_found, action_found_save, action_save, action_found_save, action_found,
+	action_found, action_found_save, action_save, action_found_save, action_found,
 };
 
 int main(void)
