@@ -50,7 +50,7 @@ int main(int argc, char * argv[])
 			PRINT("(%d %d) by pc\n", x, y);
 		}
 		
-		sleep(1);
+		//sleep(1);
 	}
 	
 
