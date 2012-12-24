@@ -27,6 +27,8 @@ int main(void)
 
 		oldx = x;
 		oldy = y;
+
+		sleep(1);
 	}	
 	
 	fclose(fd);
