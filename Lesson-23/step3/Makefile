@@ -10,6 +10,9 @@ t2:
 	rm log.txt
 	./match pc | ./pipe | ./match people | ./pipe 
 
+p:
+	mkfifo p1 p2
+
 t3:
 	cat p2 | ./match pc > p1
 
