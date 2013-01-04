@@ -49,7 +49,7 @@ int main(int argc, char * argv[])
 			x++;
 			y++;
 
-			printf("%d %d\n", x, y);
+			printf("step : %d %d\n", x, y);
 			fflush(stdout);
 
 			PRINT("step:%d (%d %d) by pc\n", step, x, y);

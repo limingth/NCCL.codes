@@ -7,7 +7,7 @@ int main(void)
 	printf("hello, NCCL!\n");
 	
 	counter =  0;
-	while (counter < 10)
+	while (counter < 0)
 	{
 		counter++;
 		printf("counter = %d\n", counter);

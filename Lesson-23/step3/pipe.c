@@ -5,6 +5,7 @@ int main(void)
 	int x, y;
 	int oldx = -1;
 	int oldy = -1;
+	char buf[64];
 
 	FILE * fd;
 
@@ -12,7 +13,10 @@ int main(void)
 
 	while (1)
 	{
-		scanf("%d %d", &x, &y);
+		scanf("%s : %d %d", buf, &x, &y);
+		if (strcmp(buf, "step") != 0)
+			continue;
+		
 		fprintf(stderr, "[pipe: <%d> %d %d]\n", getpid(), x, y);
 		fflush(stderr);
 

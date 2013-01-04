@@ -1,16 +1,25 @@
 #include <stdio.h>
 
+int counter = 3;
 int main(void)
 {
-	int counter;
+	int counter = 6;
 
 	printf("hello, NCCL!\n");
 	
-	counter = 1;
-	while (counter <= 10)
+	counter++;
+	printf("counter = %d\n", counter);
+
+	printf("(counter < 10) = %d\n", (counter > 10));
+
+	getchar();
+	while (counter < 10)
 	{
-		printf("counter = %d\n", counter);
+		int counter = 9;
+
 		counter++;
+		printf("counter = %d\n", counter);
+		getchar();
 	}
 
 	return 0;
