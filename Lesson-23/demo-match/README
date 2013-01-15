@@ -1,0 +1,7 @@
+
+just make test, it will do everything
+
+$ make test
+
+
+$ make re (replay)
