@@ -1,9 +1,13 @@
 #include <stdio.h>
-#include <string.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <errno.h>
 
 /* define chessboard size */
-#define ROW  10
-#define COL  10
+#define ROW  15
+#define COL  15
 
 /* define how many chess win */
 #define N  5
@@ -31,7 +35,36 @@ struct dir_struct dirs[8] =
 
 int board[ROW][COL] = {{0} };
 
+/* display chessboard using printf */
 void print_board(void)
+{
+    int i, j;
+
+    printf("\n");
+    printf("   ");
+
+    for (j = 0; j < COL; j++)
+        printf(" %d", j % 10);
+    printf("\n");
+
+    printf("  -");
+    for (j = 0; j < COL; j++)
+        printf(" -");
+
+    printf("\n");
+    for (i = 0; i < ROW; i++) {
+        printf("%2d| ", i);
+        for (j = 0; j < COL; j++) {
+            printf("%d ", board[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+}
+
+
+void print_board2(void)
 {
 	int i, j;
 
@@ -52,6 +85,39 @@ void get(int* x_addr, int* y_addr)
 {
 	printf("man please input x y : ");
 	scanf("%d %d", x_addr, y_addr);
+}
+
+void readline_from_fifo(int fd, char * buf)
+{
+	int ret = 0;
+
+	while (1)
+	{
+		ret = read(fd, buf, 1);
+		if (errno == EAGAIN || ret == 0)
+			continue;
+		//printf("get %c\n", *buf);
+
+		if (*buf == '\n' || *buf == '\0')
+			break;
+
+		buf++;
+	}
+
+	*buf = '\0';
+	printf("buf = %s", buf);
+
+	return;
+}
+
+void get_from_fifo(int* x_addr, int* y_addr, int fd)
+{
+	char buf[32];
+
+	printf("fifo please input x y : ");
+
+	readline_from_fifo(fd, buf);
+	sscanf(buf, "%d %d", x_addr, y_addr);
 }
 
 int is_onboard(int x, int y)
@@ -144,26 +210,30 @@ int main(int argc, char * argv[])
 	int y = 5;
 	int who = 0;
 	int step = 0;
-
-	char logfile[64];
-	char buf[64];
-
-	int oldx = -1;
-	int oldy = -1;
-
-	FILE * fd;
-
-        if (argc < 2)
-        {
-		strcpy(logfile, "m.log");
-        }
-	else
-		strcpy(logfile, argv[1]);
+	int first = 0;
 
 	printf("Hello, chess board!\n");
-	printf("logfile is %s\n", logfile);
 
-	fd = fopen(logfile, "r");
+	if (argc < 2)
+	{
+		printf("./a.out who_is_first(man/machine)\n");
+		return 0;
+	}
+
+	if (strcmp(argv[1], "machine") == 0)
+	{
+		printf("machine first\n");
+		first = 1;	// 1 -> machine first
+	}
+	else
+	{
+		printf("man first\n");
+		first = 2;	// 2 -> man first
+	}
+
+	printf("open p1... \n");
+	int fd = open("p1", O_RDONLY);
+	printf("p1 opened. fd = %d\n", fd);
 
 	print_board();
 
@@ -172,8 +242,20 @@ int main(int argc, char * argv[])
 		who = step % 2 + 1;
 		printf("player %d -> ", who);
 
-		fscanf(fd, "%s %d : %d %d", buf, &step, &x, &y);
-		fprintf(stdout, "step %d : %d %d\n", step, x, y);
+		if (first == who)
+		{   
+			/* computer think a position */
+			//think(&x, &y);
+			get_from_fifo(&x, &y, fd);
+			printf("machine: %d %d\n", x, y);
+
+		}   
+		else
+		{   
+			/* get user input x y */
+			get(&x, &y);
+			printf("man: %d %d\n", x, y);
+		}   
 
 		if (!is_onboard(x, y))
 		{
@@ -192,6 +274,14 @@ int main(int argc, char * argv[])
 		step++;
 
 		printf("step %d : %d %d [Player %d]\n", step, x, y, who); 
+		
+		/* send x y to stdout, fifo */
+		if (first != who)
+		{
+			//fprintf(stdout, "step %d : %d %d\n", step, x, y); 
+			fprintf(stdout, "%d %d\n", x, y); 
+			fflush(stdout);
+		}
 
 		print_board();
 
@@ -203,6 +293,7 @@ int main(int argc, char * argv[])
 		}
 	}
 
+	close(fd);
 	printf("game over!\n");
 
 	return 0;

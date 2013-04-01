@@ -40,13 +40,13 @@ int main(int argc, char * argv[])
 		fprintf(fd, "step %d : %d %d\n", step*2-1, x, y);
 		fflush(fd);
 
-		fprintf(fd2, "[%d,%d], ", x, y);
+		fprintf(fd2, "[%d,%d], ", y, x);
 		fflush(fd2);
 
 		oldx = x;
 		oldy = y;
 
-		usleep(1000*200);
+		usleep(1000*800);
 	}	
 	
 	fclose(fd);

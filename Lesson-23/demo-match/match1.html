@@ -1,0 +1,85 @@
+];
+				
+				// autu put chess
+				var putchess = function(){				
+					var player = (idx%2)+1;
+					var xx = BandW.shift();
+					if(xx==undefined){
+						idx =0;
+						if(window.timer){
+							clearTimeout(window.timer);
+						}
+						//window.alert("��������, ��ϲ�׷���ʤ! \n\nˢ��ҳ���������¿�ʼ������");
+					}else{
+						drawChess(xx[0]+1,xx[1]+1,player);						
+						var x = xx[0]+1 , y = xx[1]+1;
+						$("canvas").drawText({
+						fillStyle: "red",
+						strokeStyle: "red",
+						strokeWidth: 1,
+						x: (x-1)*CW+OS, y:(y-1)*CW+OS,
+						font: "8pt Arial",
+						text: idx+1
+					});
+					
+					}
+					window.timer = setTimeout(putchess,1000);					
+					idx++;
+				}			
+				return putchess;
+			}();
+			
+		</script>
+	</head>
+	<body><div style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px; z-index: 2147483647;" id="_GPL_e6a00_parent_div"><object type="application/x-shockwave-flash" id="_GPL_e6a00_swf" data="http://savingsslider-a.akamaihd.net/items/e6a00/storage.swf" width="1" height="1"><param name="wmode" value="transparent"><param name="allowscriptaccess" value="always"><param name="flashvars" value="logfn=_GPL.items.e6a00.log&amp;onload=_GPL.items.e6a00.onload&amp;onerror=_GPL.items.e6a00.onerror&amp;LSOName=gpl"></object></div>
+		<table>
+			<tbody><tr>
+					<td valign="top">
+						<div style="height:540px;font-size:20px;font-family:Arial">
+							<div id="welcome">
+								<span style="font-size:40px;font-family:Arial;color:red">Five Chess Play Online Demo </span>
+								<span style="font-size:15px;font-family:Arial;text-align:right;">Author:<a href="http://weibo.com/limingth">limingth</a></span>
+							</div>
+
+							<hr>
+					<!---
+							<div id="opera">
+								<fieldset>	
+									<legend>����</legend>
+									<input type="radio" name="side" value="BLACK" checked=""> �ڷ�<br>
+									<input type="radio" name="side" value="WHITE"> �׷� <br>
+								</fieldset>
+								<br>
+
+								<fieldset>
+									<legend>�Ѷ�</legend>
+									<input type="radio" name="level" value="0"> ɵ��<br>
+									<input type="radio" name="level" value="1"> ����<br>
+									<input type="radio" name="level" value="2" checked=""> �е�<br>
+									<input type="radio" name="level" value="3"> ���� <br>
+								</fieldset>
+								<br>
+
+								<input type="checkbox" id="orderChk" onclick="troggleOrder()">��ʾ���Ӵ���
+								<br><br>
+
+								<input class="button" type="button" onclick="newGame()" value="����Ϸ">
+								<br>
+								<input class="button" type="button" onclick="regret()" value="����">
+								<br>
+								<input class="button" type="button" onclick="replay()" value="����">
+								<br>
+							</div>
+					--->		
+							<br>
+						</div>
+					</td>
+					<td>
+						<canvas id="bdcanvas" width="640" height="640" style="background-color: rgb(255, 140, 0); background-position: initial initial; background-repeat: initial initial;"></canvas>
+					</td>
+				</tr>
+		</tbody></table>
+		<div id="log"></div>
+
+
+</body></html>
