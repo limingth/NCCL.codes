@@ -12,7 +12,7 @@ the demo codes for New Concept C Language
 	git checkout Unit-1
     
 ## Five chess play demo
-	Lesson-23/demo-match
+	NCCL.codes/Lesson-23/demo-match
 
 ### play man to man
 	make m1 
