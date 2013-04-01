@@ -9,3 +9,5 @@ the demo codes for New Concept C Language
     passwd: code
     mkdir test
     git clone https://github.com/limingth/NCCL.codes.git 
+    git checkout Unit-1
+    
