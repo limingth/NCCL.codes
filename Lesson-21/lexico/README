@@ -1,0 +1,9 @@
+Léxico feito em Flex da linguagem C
+
+Tokens reconhecidos estão no arquivo "linguagem.txt"
+
+Para compilar:  $ make run
+                $ void if 785738 dasf (enfim)
+
+Para analisar um arquivo:   $ make
+                            $ ./a.out < arquivo.txt

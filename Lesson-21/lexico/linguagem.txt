@@ -1,0 +1,62 @@
+Identificadores: IDENTIFIER
+Inteiros: NUM_INTEGER
+Octais:   NUM_OCTAL
+Hexadecimal: NUM_HEXA
+String:  STRING
+Caracter: CHARACTER
+
+void     VOID
+int      INT
+char     CHAR
+return   RETURN
+break    BREAK
+switch   SWITCH
+case     CASE
+default  DEFAULT
+do       DO
+while    WHILE
+for      FOR
+if       IF
+else     ELSE
++        PLUS
+-        MINUS
+*        MULTIPLY
+%        REMAINDER
+++       INC
+--       DEC
+&        BITWISE_AND
+|        BITWISE_OR
+~        BITWISE_NOT
+^        BITWISE_XOR
+!        NOT
+&&       LOGICAL_AND
+||       LOGICAL_OR
+==       EQUAL
+!=       NOT_EQUAL
+<        LESS_THAN 
+>        GREATER_THAN
+<=       LESS_EQUAL
+>=       GREATER_EQUAL
+>>       R_SHIFT
+<<       L_SHIFT
+=        ASSIGN
++=       ADD_ASSIGN
+-=       MINUS_ASSIGN
+;        SEMICOLON        
+,        COMMA
+:        COLON
+(        L_PAREN
+)        R_PAREN
+{        L_CURLY_BRACKET
+}        R_BRACE_BRACKET
+?        TERNARY_CONDITIONAL
+#        NUMBER_SIGN
+printf   PRINTF
+scanf    SCANF
+define   DEFINE
+exit     EXIT
+
+Devem ser removidos:
+
+Coment�rios de uma linha: (//)
+Coment�rios de multiplas linhas: (/* ... */)
