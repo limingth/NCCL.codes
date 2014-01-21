@@ -3,6 +3,8 @@
 
 int mycp_main(int, char**);
 int readelf_main(int, char**);
+int sed_main(int, char**);
+int math_main(int, char**);
 
 struct operation
 {
@@ -12,6 +14,8 @@ struct operation
 {
 	{ "mycp", mycp_main },
 	{ "readelf", readelf_main },
+	{ "sed", sed_main },
+	{ "math", math_main },
 	// add more opeation here
 };
 
@@ -68,12 +72,12 @@ void shell_parse(char *buf)
 	}
 
 	argv[argc] = NULL;
+#if 0
 	printf("argc = %d\n", argc);
 	for (i = 0; i <= argc; i++)
 		printf("argv[%d] : %s\n", i, argv[i]);
-
+#endif
 	command_do(argc, argv);
-
 }
 
 //int main(void)
@@ -91,7 +95,7 @@ int main(int argc, char *argv[], char *env[])
 	{
 		printf("NCCL# ");
 		fgets(buf, 64, stdin);
-		printf("buf = %s\n", buf);
+		//printf("buf = %s\n", buf);
 		
 		shell_parse(buf);
 	}
