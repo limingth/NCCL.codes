@@ -6,6 +6,7 @@ int readelf_main(int, char**);
 int sed_main(int, char**);
 int math_main(int, char**);
 int more_main(int, char**);
+int sort_main(int, char**);
 
 struct operation
 {
@@ -18,6 +19,7 @@ struct operation
 	{ "sed", sed_main },
 	{ "math", math_main },
 	{ "more", more_main },
+	{ "sort", sort_main },
 	// add more opeation here
 };
 
