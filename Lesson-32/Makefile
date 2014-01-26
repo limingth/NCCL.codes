@@ -9,6 +9,6 @@ CMD_MOD = \
 	../Lesson-31/cmd_ll.c	
 
 all:
-	gcc shell.c $(CMD_MOD) -o bashclone
+	gcc main.c shell.c $(CMD_MOD) -o bashclone
 
 
