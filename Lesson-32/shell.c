@@ -7,6 +7,7 @@ int sed_main(int, char**);
 int math_main(int, char**);
 int more_main(int, char**);
 int sort_main(int, char**);
+int ll_main(int, char**);
 
 struct operation
 {
@@ -20,6 +21,7 @@ struct operation
 	{ "math", math_main },
 	{ "more", more_main },
 	{ "sort", sort_main },
+	{ "ll", ll_main },
 	// add more opeation here
 };
 
