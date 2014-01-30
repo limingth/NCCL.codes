@@ -55,16 +55,17 @@ int sed_main(int argc, char *argv[])
 	//strcpy(buf, "I love unix. Linux is GNU is not unix");
 	debug("%s", buf);
 
-	char *cursor = buf;	// the beginning
-	char *where;		// where we find a match
-	int counter = 0;
+	char *cursor = buf;	// the beginning pointer of where we start
+	char *where;		// the pointer where we find a match
+	int counter = 0;	// how many matches we find 
 
 	while ((where = strstr(cursor, regexp)) != NULL)
 	{
 		counter++;
+
 		debug("where = %s\n", where);
 		for (i = 0; i < where - cursor; i++)
-			putchar(*(cursor+i));
+			putchar(cursor[i]);
 		
 		if (flag == 'g' || flag - '0' == counter)
 			printf("%s", replace);
@@ -75,8 +76,8 @@ int sed_main(int argc, char *argv[])
 		debug("cursor = %s\n", cursor);
 	} 
 
-	for (i = 0; *(cursor+i) != '\0'; i++)
-		putchar(*(cursor+i));
+	for (i = 0; cursor[i] != '\0'; i++)
+		putchar(cursor[i]);
 
 	return 0;
 }
