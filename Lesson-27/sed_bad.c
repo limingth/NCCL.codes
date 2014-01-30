@@ -24,7 +24,6 @@ int sed_main(int argc, char *argv[])
 	int n;
 	// [2addr]s/regular expression/replacement/flags from man strtok
 	char *cmd, *regexp, *replace, *flags = NULL;
-	char flag;
 
 	// parse pattern like 's/unix/linux'
 	debug("patter = %s\n", argv[1]);
@@ -44,34 +43,45 @@ int sed_main(int argc, char *argv[])
 	// flags = "", "g", "3" 
 	flags = strtok(NULL, "/");
 	debug("flags = %s\n", flags);
-	if (flags == NULL)	// if no flag, that means replace the 1st match
-		flag = '1';
-	else
-		flag = flags[0];
-	
-	debug("flag = %c\n", flag);
 
 	fgets(buf, SIZE, stdin);
 	//strcpy(buf, "I love unix. Linux is GNU is not unix");
 	debug("%s", buf);
 
-	char *cursor = buf;	// the beginning
-	char *where;		// where we find a match
+	char *cursor = buf;
+	char *occur;
 	int counter = 0;
 
-	while ((where = strstr(cursor, regexp)) != NULL)
+	while (1)
 	{
+		occur = strstr(cursor, regexp);
+		if (occur == NULL)
+			break;
+
 		counter++;
-		debug("where = %s\n", where);
-		for (i = 0; i < where - cursor; i++)
+		debug("occur = %s\n", occur);
+		for (i = 0; i < occur - cursor; i++)
 			putchar(*(cursor+i));
 		
-		if (flag == 'g' || flag - '0' == counter)
+		if (flags == NULL)
+		{
+			if (counter == 1)
+				printf("%s", replace);
+			else
+				printf("%s", regexp);
+		}
+		else	
+		if (strcmp(flags, "g") == 0)
 			printf("%s", replace);
 		else
-			printf("%s", regexp);
+		{
+			if (isdigit(*flags) && *flags - '0' == counter)
+				printf("%s", replace);
+			else
+				printf("%s", regexp);
+		}
 	
-		cursor += where - cursor + strlen(regexp);
+		cursor += occur - cursor + strlen(regexp);
 		debug("cursor = %s\n", cursor);
 	} 
 
