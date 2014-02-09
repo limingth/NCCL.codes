@@ -1,0 +1,2 @@
+all:
+	gcc stack.c
