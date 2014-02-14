@@ -1,4 +1,4 @@
 
 all:
-	gcc ringlist.c main.c
+	gcc clist.c main.c
 	./a.out

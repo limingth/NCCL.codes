@@ -1,23 +1,23 @@
 #include <stdio.h>
-#include "list.h"
+#include "clist.h"
 
 int main(void)
 {
 	link cursor = NULL;
 	int i = 0;
 
-	list_print(cursor, print_int_data);
+	clist_print(cursor, print_int_data);
 
 	for (i = 0; i < 100; i++)
 	{
 		int *p = make_data(i+1);
 		link item = make_node(p);
-		cursor = list_insert_after(cursor, item);
+		cursor = clist_insert_after(cursor, item);
 	}
 
 	cursor = cursor->next;
-	list_print(cursor, print_int_data);
-	printf("ring list length = %d\n", list_length(cursor));
+	clist_print(cursor, print_int_data);
+	printf("ring list length = %d\n", clist_length(cursor));
 
 	int step = 0;
 	while (cursor != NULL)
@@ -28,8 +28,8 @@ int main(void)
 		if (step == 3)	
 		{
 			printf("-> %d out\n", *(int *)(cursor->data));
-			cursor = list_delete(cursor, cursor);
-			printf("length = %d\n", list_length(cursor));
+			cursor = clist_delete(cursor, cursor);
+			printf("length = %d\n", clist_length(cursor));
 			step = 0;
 		}
 		else

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "list.h"
+#include "clist.h"
 
 link make_node(void *data)
 {
@@ -21,7 +21,7 @@ void delete_node(link p)
 	return;	
 }
 
-link list_tail(link cur)
+link clist_tail(link cur)
 {
 	link p = cur;
 
@@ -31,7 +31,7 @@ link list_tail(link cur)
 	return p;
 }
 
-int list_length(link cur)
+int clist_length(link cur)
 {
 	link p = cur;
 	int count = 0;
@@ -48,7 +48,7 @@ int list_length(link cur)
 	return count;
 }
 
-link list_insert_after(link cur, link item)
+link clist_insert_after(link cur, link item)
 {
 	if (cur == NULL)
 	{
@@ -63,7 +63,7 @@ link list_insert_after(link cur, link item)
 	return item;
 }
 
-link list_delete(link cur, link item)
+link clist_delete(link cur, link item)
 {
 	link p = cur;
 
@@ -89,7 +89,7 @@ link list_delete(link cur, link item)
 	return p;
 }
 
-void list_print(link cur, void (*pf)(void *))
+void clist_print(link cur, void (*pf)(void *))
 {
 	link p = cur;
 
