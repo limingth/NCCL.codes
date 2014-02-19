@@ -22,7 +22,7 @@ int sed_main(int argc, char *argv[])
 
 	char buf[SIZE];
 	int n;
-	// [2addr]s/regular expression/replacement/flags from man strtok
+	// [2addr]s/regular expression/replacement/flags from man sed
 	char *cmd, *regexp, *replace, *flags = NULL;
 	char flag;
 
