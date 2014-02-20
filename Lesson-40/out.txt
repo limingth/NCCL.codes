@@ -1,0 +1,22 @@
+This
+is
+a
+book
+That
+is
+a
+bag
+This
+is
+a
+book
+That
+is
+a
+bag
+a: 4
+book: 2
+is: 4
+bag: 2
+That: 2
+This: 2
