@@ -54,6 +54,7 @@ void Max_Heapify(int A[], int i, int heap_size)
         Max_Heapify(A, largest, heap_size);
     }
 }
+
 void Build_Max_Heap(int A[], int heap_size)
 {
     for(int i = (heap_size-2)/2; i >= 0; i--)
