@@ -1,0 +1,41 @@
+
+UNAME(1)                  BSD General Commands Manual                 UNAME(1)
+
+NNAAMMEE
+     uunnaammee -- Print operating system name
+
+SSYYNNOOPPSSIISS
+     uunnaammee [--aammnnpprrssvv]
+
+DDEESSCCRRIIPPTTIIOONN
+     The uunnaammee utility writes symbols representing one or more system charac-
+     teristics to the standard output.
+
+     The following options are available:
+
+     --aa      Behave as though all of the options --mmnnrrssvv were specified.
+
+     --mm      print the machine hardware name.
+
+     --nn      print the nodename (the nodename may be a name that the system is
+             known by to a communications network).
+
+     --pp      print the machine processor architecture name.
+
+     --rr      print the operating system release.
+
+     --ss      print the operating system name.
+
+     --vv      print the operating system version.
+
+     If no options are specified, uunnaammee prints the operating system name as if
+     the --ss option had been specified.
+
+SSEEEE AALLSSOO
+     hostname(1), machine(1), sw_vers(1), uname(3)
+
+SSTTAANNDDAARRDDSS
+     The uunnaammee utility conforms to IEEE Std 1003.2-1992 (``POSIX.2'').  The --pp
+     option is an extension to the standard.
+
+BSD                            November 9, 1998                            BSD
