@@ -7,8 +7,10 @@ int binsearch(int x, int v[], int n)
 	low = 0;
 	high = n - 1;
 	while (low <= high) {
-		mid = (low+high)/2; if (x < v[mid])
-			high = mid + 1; else if (x > v[mid])
+		mid = (low+high)/2; 
+		if (x < v[mid])
+			high = mid - 1; 
+		else if (x > v[mid])
 			low = mid + 1;
 		else /* found match */
 			return mid;

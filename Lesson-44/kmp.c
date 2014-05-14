@@ -49,7 +49,7 @@ int main(void)
 	const char * p;
 
 	printf("%s\n",base);
-	//scanf("%s", pattern);
+	scanf("%s", pattern);
 	printf("\n%s\n",pattern);
 
 	p = kmp_search(base, pattern);

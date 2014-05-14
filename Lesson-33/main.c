@@ -2,6 +2,8 @@
 #include "list.h"
 #include "array.h"
 
+int g = 100;
+
 int main(void)
 {
 	Array samples = array_new();

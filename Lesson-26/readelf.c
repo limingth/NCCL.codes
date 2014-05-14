@@ -7,7 +7,7 @@ typedef int Elf32_Word;
 typedef int Elf32_Addr;
 typedef int Elf32_Off;
 
-#define EI_NIDENT 12
+#define EI_NIDENT 16
 
 typedef struct {
     Elf32_Char  e_ident[EI_NIDENT];
